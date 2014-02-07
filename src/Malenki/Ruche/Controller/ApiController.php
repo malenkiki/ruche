@@ -29,7 +29,7 @@ namespace Malenki\Ruche\Controller;
 class ApiController extends Controller 
 {
     public function init(){
-        $this->res['Content-Type'] = 'text/html; charset=utf-8';
+        $this->res['Content-Type'] = 'text/json; charset=utf-8';
     }
 
     /**
@@ -294,7 +294,8 @@ class ApiController extends Controller
             }
             $arr = $arr_filtered;
         }
-        $this->app->render('ApiRoot.php', array('table' => $arr));
+
+        $this->res->body(json_encode($arr));
     }
 
 }

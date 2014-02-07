@@ -29,6 +29,11 @@ use RedBean_Facade as R;
 
 class ApiProjectController extends Controller 
 {
+    public function init()
+    {
+        $this->res['Content-Type'] = 'text/json; charset=utf-8';
+    }
+
     public function postAction()
     {
         $post = (object) $this->req->post();
@@ -76,7 +81,6 @@ class ApiProjectController extends Controller
 
     public function getAction($pid = null)
     {
-        $this->res['Content-Type'] = 'text/json; charset=utf-8';
         // Only one
         if($pid)
         {
@@ -119,7 +123,6 @@ class ApiProjectController extends Controller
     
     public function getBySlugAction($slug)
     {
-        $this->res['Content-Type'] = 'text/json; charset=utf-8';
         $project = R::findOne('project', ' slug = ? ', array($slug));
 
         if(!$project->id)

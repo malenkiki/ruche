@@ -29,9 +29,13 @@ use RedBean_Facade as R;
 
 class ApiMilestoneController extends Controller 
 {
-    public function getAction($mid)
+    public function init()
     {
         $this->res['Content-Type'] = 'text/json; charset=utf-8';
+    }
+
+    public function getAction($mid)
+    {
         $milestone = R::load('milestone',$mid);
 
         if(!$milestone->id)
