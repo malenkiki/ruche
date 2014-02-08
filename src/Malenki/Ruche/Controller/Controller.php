@@ -26,12 +26,28 @@
 namespace Malenki\Ruche\Controller;
 
 
+/**
+ * Base controller used to create all other controllers of ruche API.
+ * 
+ * @property-read $app The Slim application
+ * @property-read $res The Response object
+ * @property-read $req The Request object
+ * @author Michel Petit <petit.michel@gmail.com> 
+ * @license MIT
+ */
 class Controller
 {
     protected $app;
     protected $res;
     protected $req;
 
+    public function __get($name)
+    {
+        if(in_array($name, array('app', 'res', 'req')))
+        {
+            return $this->$name;
+        }
+    }
 
     public function __construct()
     {
@@ -50,6 +66,16 @@ class Controller
     {
         $class_name = sprintf('\\'.__NAMESPACE__. '\%sController', $controller);
         $action_name = sprintf('%sAction', $action);
+
+
+        // SQLITE3 is mandatory!!!
+        if(!extension_loaded('sqlite3'))
+        {
+            $app = \Slim\Slim::getInstance();
+            $app->response()->status(500);
+            echo json_encode('PHP extension "sqlite3" is not available. Ruche cannot run without it!');
+            exit();
+        }
 
         $obj = new $class_name();
         call_user_func(array($obj, 'init'));

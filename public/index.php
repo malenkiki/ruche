@@ -44,10 +44,14 @@ $app->get('/', function () {
     echo "TODO :)";
 });
 
+function run($controller, $action, $args = array())
+{
+    Controller::action($controller, $action, $args);
+}
 
 // API’s root. Display some help about this API.
 $app->get('/api(/(:lang))', function ($lang = 'fr') {
-    Controller::action('Api', 'root', array($lang));
+    run('Api', 'root', array($lang));
 })->conditions(array('lang' => '(en|fr)'));
 
 
@@ -59,25 +63,25 @@ $app->get('/api(/(:lang))', function ($lang = 'fr') {
 
 // This is route to create new project
 $app->post('/api/projects(/)', function () {
-    Controller::action('ApiProject', 'post');
+    run('ApiProject', 'post');
 });
 
 
 // This is route to get project $pid 
 $app->get('/api/projects/:pid(/)', function($pid){
-    Controller::action('ApiProject', 'get', array($pid));
+    run('ApiProject', 'get', array($pid));
 });
 
 // This is route to get project by its slug $slug 
 $app->get('/api/project-by-slug/:slug(/)', function($slug){
-    Controller::action('ApiProject', 'getBySlug', array($slug));
+    run('ApiProject', 'getBySlug', array($slug));
 });
 
 
 
 // This route gets list of all projects
 $app->get('/api/projects(/)', function () {
-    Controller::action('ApiProject', 'get');
+    run('ApiProject', 'get');
 });
 
 
@@ -91,14 +95,14 @@ $app->post('/api/projects/:pid/milestones(/)', function ($pid) {
 
 // This route lists milestones available into project $pid 
 $app->get('/api/projects/:pid/milestones(/)', function ($pid) {
-    Controller::action('ApiMilestone', 'getList', array($pid));
+    run('ApiMilestone', 'getList', array($pid));
 });
 
 
 
 // This route gets informations about milestone $mid 
 $app->get('/api/milestones/:mid(/)', function ($mid) {
-    Controller::action('ApiMilestone', 'get', array($mid));
+    run('ApiMilestone', 'get', array($mid));
 });
 
 
@@ -128,8 +132,5 @@ $app->post('/api/projects/:pid/users(/)', function ($pid) {
 $app->get('/api/projects/:pid/users/:uid(/)', function ($pid, $uid) {
     printf('This route adds new user into project %d', $pid);
 });
-
-
-
 
 $app->run();
