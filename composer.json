@@ -4,7 +4,7 @@
         "slim/extras": "2.0.*",
         "jbroadway/urlify": "1.0.0-stable",
         "dflydev/markdown": "v1.0.2",
-        "gabordemooij/redbean": "v3.3.6",
+        "gabordemooij/redbean": "v3.3.6"
     },
     "autoload": {
         "psr-0": {
