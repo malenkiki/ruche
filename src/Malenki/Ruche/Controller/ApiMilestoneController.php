@@ -27,6 +27,12 @@ namespace Malenki\Ruche\Controller;
 
 use RedBean_Facade as R;
 
+/**
+ * ApiMilestoneController 
+ * 
+ * @author Michel Petit <petit.michel@gmail.com> 
+ * @license MIT
+ */
 class ApiMilestoneController extends Controller 
 {
     public function init()

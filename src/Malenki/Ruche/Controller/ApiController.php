@@ -26,6 +26,12 @@
 namespace Malenki\Ruche\Controller;
 
 
+/**
+ * ApiController 
+ * 
+ * @author Michel Petit <petit.michel@gmail.com> 
+ * @license MIT
+ */
 class ApiController extends Controller 
 {
     public function init(){

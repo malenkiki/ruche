@@ -27,13 +27,28 @@ namespace Malenki\Ruche\Controller;
 use Malenki\Model\Project as Project;
 use RedBean_Facade as R;
 
+/**
+ * Controller about projects
+ * 
+ * @author Michel Petit <petit.michel@gmail.com> 
+ * @license MIT
+ */
 class ApiProjectController extends Controller 
 {
     public function init()
     {
+        //TODO: put that into main controller?
         $this->res['Content-Type'] = 'text/json; charset=utf-8';
     }
 
+
+
+    /**
+     * Creates a new project by POST method. 
+     * 
+     * @access public
+     * @return void
+     */
     public function postAction()
     {
         $post = (object) $this->req->post();
@@ -79,6 +94,13 @@ class ApiProjectController extends Controller
 
 
 
+    /**
+     * Gets one project or a list of projects. 
+     * 
+     * @param mixed $pid If integer, load one project if it exits.
+     * @access public
+     * @return void
+     */
     public function getAction($pid = null)
     {
         // Only one
@@ -121,6 +143,13 @@ class ApiProjectController extends Controller
     }
     
     
+    /**
+     * Gets one project by giving its slug. 
+     * 
+     * @param string $slug 
+     * @access public
+     * @return void
+     */
     public function getBySlugAction($slug)
     {
         $project = R::findOne('project', ' slug = ? ', array($slug));

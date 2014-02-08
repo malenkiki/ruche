@@ -37,10 +37,39 @@ namespace Malenki\Ruche\Controller;
  */
 class Controller
 {
+    /**
+     * Contains the Slim application object.
+     * 
+     * @var \Slim\Slim
+     * @access protected
+     */
     protected $app;
+
+    /**
+     * Contains the Slim HTTP response object. 
+     * 
+     * @var Slim\Http\Response
+     * @access protected
+     */
     protected $res;
+
+    /**
+     * Contains the Slim HTTP request object.
+     * 
+     * @var Slim\Http\Request
+     * @access protected
+     */
     protected $req;
 
+
+
+    /**
+     * Defines magic getters Slim main app, response and request. 
+     * 
+     * @param string $name 
+     * @access public
+     * @return object
+     */
     public function __get($name)
     {
         if(in_array($name, array('app', 'res', 'req')))
@@ -49,6 +78,14 @@ class Controller
         }
     }
 
+
+
+    /**
+     * Constructs object by setting response, request and main Slim app. 
+     * 
+     * @access public
+     * @return void
+     */
     public function __construct()
     {
         $this->app = \Slim\Slim::getInstance();
@@ -57,11 +94,22 @@ class Controller
     }
 
 
+
     public function init(){
     }
 
     
     
+    /**
+     * Run action for given controller with optionnal args.
+     * 
+     * @param string $controller 
+     * @param string $action 
+     * @param array $args 
+     * @static
+     * @access public
+     * @return mixed
+     */
     public static function action($controller, $action, $args = array())
     {
         $class_name = sprintf('\\'.__NAMESPACE__. '\%sController', $controller);
